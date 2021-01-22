@@ -1,0 +1,22 @@
+Aplicatie web pentru acordarea feedback-ului
+
+Instructiuni de rulare
+
+1. pronire server REST pentru baza de date
+	-> din directorul backend se ruleaza comanda node index.js
+	
+2. pornire API react
+	-> din directorul frontend se ruleaza comanda npm start
+
+Functionalitati
+
+Din pagina principala utilizatorii pot intra in aplicatie ca student sau ca profesor.
+
+Scenariul 1 - utilizator profesor
+Dupa logare, pagina principala a profesorului este o interfata cu butoane "Adauga activitate" si "Vezi feedback" si un tabel cu activitatile existente.
+Optiunea "Adauga activitate" incarca in pagina un formular de introducere date pentru activitate.
+Optiunea "Vezi feedback" incarca in pagina lista de feedback pentru o activitate a carui cod a fost introdus in text field.
+
+Scenariul 2 - utilizator student
+Dupa logare utilizatorul introduce codul activitatii (primit de la profesor). Codul este valid doar pe durata activitatii.
+Studentul are o interfata cu 4 emoticoane pe care poate apasa pentru a da feedback in timp real.

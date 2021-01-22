@@ -1,0 +1,63 @@
+IF(DB_ID('ProiectTW') IS NULL)
+	CREATE DATABASE ProiectTW
+GO
+
+USE ProiectTW;
+
+IF OBJECT_ID('Profesori') IS NULL
+	CREATE TABLE Profesori
+	(
+	ProfesorId INT NOT NULL IDENTITY (1,1),
+	ProfesorNume NVARCHAR(100) NOT NULL,
+	ProfesorPrenume NVARCHAR(100) NOT NULL,
+	CONSTRAINT PK_Profesori PRIMARY KEY (ProfesorId)
+	)
+GO
+
+IF OBJECT_ID('Studenti') IS NULL
+	CREATE TABLE Studenti
+	(
+	StudentId INT NOT NULL IDENTITY (1,1),
+	StudentNume NVARCHAR(100) NOT NULL,
+	StudentPrenume NVARCHAR(100) NOT NULL,
+	CONSTRAINT PK_Studenti PRIMARY KEY (StudentId)
+	)
+GO
+
+IF OBJECT_ID('Feedback') IS NULL
+	CREATE TABLE Feedback
+	(
+	FeedbackId INT NOT NULL IDENTITY (1,1),
+	StudentId INT NOT NULL,
+	Timp DATETIME NOT NULL,
+	CodUnicActivitate INT NOT NULL,
+	FeedbackTip NVARCHAR(50) NOT NULL,
+	CONSTRAINT PK_Feedback PRIMARY KEY (FeedbackId)
+	)
+
+GO
+
+IF OBJECT_ID('Activitate') IS NULL
+	CREATE TABLE Activitate
+	(
+	CodUnicActivitate INT NOT NULL,
+	Descriere NVARCHAR(100) NOT NULL,
+	DataActivitate DATETIME NOT NULL,
+	Durata INT NOT NULL,
+	ProfesorId INT NOT NULL,
+	CONSTRAINT PK_Activitate PRIMARY KEY (CodUnicActivitate)
+	)
+GO
+
+IF OBJECT_ID('FK_Feedback_Student') IS NULL
+	ALTER TABLE Feedback ADD CONSTRAINT FK_Feedback_Student FOREIGN KEY (StudentId) REFERENCES Studenti (StudentId)
+GO
+
+IF OBJECT_ID('FK_Activitate_Profesor') IS NULL
+	ALTER TABLE Activitate ADD CONSTRAINT FK_Activitate_Profesor FOREIGN KEY (ProfesorId) REFERENCES Profesori (ProfesorId)
+GO
+
+IF OBJECT_ID('FK_Feedback_Activitate') IS NULL
+	ALTER TABLE Feedback ADD CONSTRAINT FK_Feedback_Activitate FOREIGN KEY (CodUnicActivitate) REFERENCES Activitate (CodUnicActivitate)
+GO
+
